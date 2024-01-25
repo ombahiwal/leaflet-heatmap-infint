@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Heatmap from './Heatmap';
+import BestCitiesForm from './BestCitiesForm';
 
 const App = () => {
   const [heatmapPoints, setHeatmapPoints] = useState([]);
@@ -91,6 +92,7 @@ const App = () => {
       ) : (
         <Heatmap center={heatmapPoints[0]} zoom={10} points={heatmapPoints} circles={circles} />
       )}
+      <BestCitiesForm/>
     </div>
   );
 };
