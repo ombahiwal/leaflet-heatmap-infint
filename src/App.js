@@ -23,7 +23,7 @@ const App = () => {
 
         const markersArray = data.locations.map(location => ({
           indexValue: location[indexValue],
-          popupContent: `${location.placename}<br/>AQI: ${location.aqi}<br/>Greenness: ${location.greenness}<br/>Transitscore: ${location.transitscore}<br/>Walkability: ${location.walkability}`,
+          popupContent: <div><b>{location.placename}</b><br/>AQI: {location.aqi}<br/>Greenness: {location.greenness}<br/>Transitscore: {location.transitscore}<br/>Walkability: {location.walkability}</div>,
           center: [location.geoCoordinate.latitude, location.geoCoordinate.longitude],
           radius: 300,
           position: { lat: location.geoCoordinate.latitude, lng: location.geoCoordinate.longitude }
