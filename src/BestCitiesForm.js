@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Container, Row, Col, Form, Button, ListGroup } from 'react-bootstrap';
 
 const BestCitiesForm = () => {
   const [greennessWeight, setGreennessWeight] = useState('');
@@ -11,7 +12,6 @@ const BestCitiesForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Construct the query parameters based on the form inputs
     const queryParams = {
       greenness_weight: greennessWeight,
       walkability_weight: walkabilityWeight,
@@ -20,70 +20,76 @@ const BestCitiesForm = () => {
     };
 
     try {
-      // Send a GET request using Axios
       const response = await axios.get('http://127.0.0.1:5000/best_location', { params: queryParams });
-
-      // Handle the response by updating the city list
-      setCityList(response.data);
+      setCityList(response.data.results);
     } catch (error) {
-      // Handle errors
       console.error('Error fetching data:', error);
     }
   };
 
   return (
-    <div>
-      <form id="bestCitiesForm" onSubmit={handleSubmit}>
-      <label>Find the best city based on your own weighting:</label><br />
-      <label htmlFor="greenness_weight">Greenness:</label>
-      <input
-        type="number"
-        id="greenness_weight"
-        name="greenness_weight"
-        value={greennessWeight}
-        onChange={(e) => setGreennessWeight(e.target.value)}
-      /><br />
+    <Container>
+      <Row>
+        <Col>
+          <Form onSubmit={handleSubmit}>
+            <Form.Label>Find the best city based on your own weighting:</Form.Label>
+            <Form.Group controlId="greenness_weight">
+              <Form.Label>Greenness:</Form.Label>
+              <Form.Control
+                type="number"
+                value={greennessWeight}
+                onChange={(e) => setGreennessWeight(e.target.value)}
+              />
+            </Form.Group>
 
-      <label htmlFor="walkability_weight">Walkability:</label>
-      <input
-        type="number"
-        id="walkability_weight"
-        name="walkability_weight"
-        value={walkabilityWeight}
-        onChange={(e) => setWalkabilityWeight(e.target.value)}
-      /><br />
+            <Form.Group controlId="walkability_weight">
+              <Form.Label>Walkability:</Form.Label>
+              <Form.Control
+                type="number"
+                value={walkabilityWeight}
+                onChange={(e) => setWalkabilityWeight(e.target.value)}
+              />
+            </Form.Group>
 
-      <label htmlFor="aqi_weight">AQI:</label>
-      <input
-        type="number"
-        id="aqi_weight"
-        name="aqi_weight"
-        value={aqiWeight}
-        onChange={(e) => setAqiWeight(e.target.value)}
-      /><br />
+            <Form.Group controlId="aqi_weight">
+              <Form.Label>AQI:</Form.Label>
+              <Form.Control
+                type="number"
+                value={aqiWeight}
+                onChange={(e) => setAqiWeight(e.target.value)}
+              />
+            </Form.Group>
 
-      <label htmlFor="transportation_weight">Transportation:</label>
-      <input
-        type="number"
-        id="transportation_weight"
-        name="transportation_weight"
-        value={transportationWeight}
-        onChange={(e) => setTransportationWeight(e.target.value)}
-      /><br />
+            <Form.Group controlId="transportation_weight">
+              <Form.Label>Transportation:</Form.Label>
+              <Form.Control
+                type="number"
+                value={transportationWeight}
+                onChange={(e) => setTransportationWeight(e.target.value)}
+              />
+            </Form.Group>
 
-      <button type="submit">Find your best city</button>
-    </form>
+            <Button variant="primary" type="submit">
+              Find your best city
+            </Button>
+          </Form>
+        </Col>
+      </Row>
 
-      <ul>
-        {cityList.map((city, index) => (
-          <li key={index}>
-            <strong>Name:</strong> {city.name},{' '}
-            <strong>Coordinates:</strong> ({city.geoCoordinate.latitude}, {city.geoCoordinate.longitude}),{' '}
-            <strong>Score:</strong> {city.score}
-          </li>
-        ))}
-      </ul>
-    </div>
+      <Row>
+        <Col>
+          <ListGroup>
+            {cityList.map((city, index) => (
+              <ListGroup.Item key={index}>
+                <strong>Name:</strong> {city.name},{' '}
+                <strong>Coordinates:</strong> ({city.geoCoordinate.latitude}, {city.geoCoordinate.longitude}),{' '}
+                <strong>Score:</strong> {city.score}
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
