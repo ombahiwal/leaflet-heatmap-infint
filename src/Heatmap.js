@@ -19,6 +19,26 @@ const reversedGradient = {
   0.8: 'cyan',
   1.0: 'green'
 }
+
+function gradientColor(value) {
+    // Ensure the input value is within the range [0, 1]
+    value = Math.max(0, Math.min(1, value));
+
+    // Define the RGB values for the start (red) and end (green) colors
+    var startColor = [0, 0, 255]; // Blue
+    var endColor = [0, 255, 0];   // Green
+
+    // Interpolate between the start and end colors based on the input value
+    var interpolatedColor = [
+        Math.round(startColor[0] * (1 - value) + endColor[0] * value),
+        Math.round(startColor[1] * (1 - value) + endColor[1] * value),
+        Math.round(startColor[2] * (1 - value) + endColor[2] * value)
+    ];
+
+    // Return the RGB string for CSS
+    return 'rgb(' + interpolatedColor.join(',') + ')';
+}
+
 function getColor(value) {
   
   const colorMap = reversedGradient;
@@ -49,7 +69,7 @@ const CirclesLayer = ({ circles }) => {
           key={index}
           center={circle.center}
           radius={circle.radius}
-          pathOptions={{ color: getColor(circle.indexValue), fillColor: getColor(circle.in) }}  // Customize the circle color
+          pathOptions={{ color: gradientColor(circle.indexValue), fillColor: getColor(circle.indexValue) }}  // Customize the circle color
         >
           <Popup>{circle.popupContent}</Popup>
         </Circle>
