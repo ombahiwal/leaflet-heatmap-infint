@@ -68,8 +68,8 @@ const App = () => {
         <label>
           <input
             type="radio"
-            value="aqi"
-            checked={indexValue === 'aqi'}
+            value="scaled_aqi"
+            checked={indexValue === 'scaled_aqi'}
             onChange={handleRadioChange}
           />
           AQI
