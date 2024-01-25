@@ -6,7 +6,7 @@ const App = () => {
   const [heatmapPoints, setHeatmapPoints] = useState([]);
   const [loading, setLoading] = useState(true);
   const [circles, setCircles] = useState([]);
-  const [indexValue, setIndexValue] = useState('greeness');
+  const [indexValue, setIndexValue] = useState('greenness');
 
   const handleRadioChange = (event) => {
     setIndexValue(event.target.value);
@@ -21,7 +21,9 @@ const App = () => {
         console.log(data);
         const markersArray = data.locations.map(location => ({
           indexValue: location[indexValue],
-          popupContent: location.placename,
+          popupContent: location.placename + "<br/> AQI: " +location.aqi +
+          "\nGreenness: " + location.greenness + "\nTransitscore: " + location.transitscore +
+          "\n Walkability"+location.walkability,
           center: [location.geoCoordinate.latitude, location.geoCoordinate.longitude],
           radius: 300,
           position: { lat: location.geoCoordinate.latitude, lng: location.geoCoordinate.longitude }
@@ -46,8 +48,8 @@ const App = () => {
         <label>
           <input
             type="radio"
-            value="greeness"
-            checked={indexValue === 'greeness'}
+            value="greenness"
+            checked={indexValue === 'greenness'}
             onChange={handleRadioChange}
           />
           Greenness

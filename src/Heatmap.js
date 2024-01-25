@@ -17,7 +17,7 @@ const reversedGradient = {
   0.6: 'yellow',
   0.7: 'lime',
   0.8: 'cyan',
-  1.0: 'blue'
+  1.0: 'green'
 }
 function getColor(value) {
   
