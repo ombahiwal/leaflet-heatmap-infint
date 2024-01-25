@@ -25,7 +25,7 @@ function gradientColor(value) {
     value = Math.max(0, Math.min(1, value));
 
     // Define the RGB values for the start (red) and end (green) colors
-    var startColor = [0, 0, 255]; // Blue
+    var startColor = [255, 0, 0]; // Blue
     var endColor = [0, 255, 0];   // Green
 
     // Interpolate between the start and end colors based on the input value
@@ -89,7 +89,7 @@ const Heatmap = ({ center, zoom, points, circles }) => {
     minOpacity: 0.5      // Minimum opacity of the heatmap
   };
   return (
-    <MapContainer center={center} zoom={zoom} style={{ height: '400px', width: '100%' }}>
+    <MapContainer center={center} zoom={zoom} style={{ height: '700px', width: '100%' }}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
